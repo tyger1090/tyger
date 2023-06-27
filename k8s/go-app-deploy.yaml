@@ -1,0 +1,40 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-app-deploy
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: go-lang-web-app
+  template:
+    metadata:
+      labels:
+        app: go-lang-web-app
+    spec:
+      containers:
+        - name: go-lang-web-app
+          image: joska99/tyger:go_app
+          ports:
+            - containerPort: 3000
+      #     volumeMounts:
+      #       - name: config-volume
+      #         mountPath: /app
+      # volumes:
+      #   - name: config-volume
+      #     configMap:
+      #       name: go-html-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: go-app-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: go-lang-web-app
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 3000
