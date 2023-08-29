@@ -12,7 +12,7 @@ localhost:3000
 
 
 
-I used Prometheus Helm chart:
+we used Prometheus Helm chart:
 https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack
 
 apply hel chart:
